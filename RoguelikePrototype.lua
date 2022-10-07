@@ -24,16 +24,22 @@ end
 
 local w = library:CreateWindow("Roguelike Prototype") 
 local b = w:CreateFolder("AutoFarm")
-
+local lab = b:Label("Counting Enemies",{
+    TextSize = 18; 
+    TextColor = Color3.fromRGB(255,255,255); 
+    BgColor = Color3.fromRGB(69,69,69); 
+    
+}) 
+local autofarm
+b:Toggle("ON/OFF",function(af)
+    autofarm = af
+end)
 local addstat
 b:Toggle("AutoStats",function(as)
     addstat = as
 end)
-local skip = false
-b:Toggle("Skip Rewards",function(sk)
-    skip = sk
-end)
-local distance = -100
+
+local distance = -50
 b:Slider("Distance",{
     min = -1000; 
     max = 1000; 
@@ -41,10 +47,11 @@ b:Slider("Distance",{
 },function(value)
     distance = value
 end)
-local autofarm
-b:Toggle("ON/OFF",function(af)
-    autofarm = af
+local skip = false
+b:Toggle("Skip Rewards",function(sk)
+    skip = sk
 end)
+
 
 local function FARM()
     for i,v in pairs(workspace.Enemies:GetChildren()) do
@@ -110,6 +117,23 @@ spawn(function()
         end
     end
 end)
+local enemycount = 0
+local function COUNT()
+    for i,v in pairs(workspace.Enemies:GetChildren()) do
+        if v.ClassName == "Model" then
+            enemycount = enemycount + 1
+            lab:Refresh("Enemy Remaining:  "..tostring(enemycount))
+        end
+    end
+    enemycount = 0
+end
+spawn(function()
+    while wait() do
+        if autofarm then
+            COUNT()
+        end
+    end
+end)
 spawn(function()
     while wait(.5) do
         if autofarm then
@@ -143,4 +167,8 @@ spawn(function()
         end
     end)
 end)
+
+
+
+
 
