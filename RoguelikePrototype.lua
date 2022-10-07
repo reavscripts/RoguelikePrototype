@@ -33,7 +33,7 @@ local skip = false
 b:Toggle("Skip Rewards",function(sk)
     skip = sk
 end)
-local distance = -1000
+local distance = -100
 b:Slider("Distance",{
     min = -1000; 
     max = 1000; 
