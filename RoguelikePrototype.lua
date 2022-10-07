@@ -33,7 +33,14 @@ local skip = false
 b:Toggle("Skip Rewards",function(sk)
     skip = sk
 end)
-local distance = 1000
+local distance = -1000
+b:Slider("Distance",{
+    min = -1000; 
+    max = 1000; 
+    precise = false; 
+},function(value)
+    distance = value
+end)
 local autofarm
 b:Toggle("ON/OFF",function(af)
     autofarm = af
@@ -136,3 +143,4 @@ spawn(function()
         end
     end)
 end)
+
