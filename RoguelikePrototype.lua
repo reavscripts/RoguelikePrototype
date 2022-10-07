@@ -6,9 +6,9 @@ local VirtualUser=game:service'VirtualUser'
 	VirtualUser:CaptureController()
 	VirtualUser:ClickButton2(Vector2.new())
 end)
+
 local library = loadstring(game:HttpGet(('https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/wall%20v3')))()
 local player = game.Players.LocalPlayer
-
 
 function fireButton1(button)
 	for i,signal in next, getconnections(button.MouseButton1Click) do 
@@ -30,6 +30,7 @@ local lab = b:Label("Counting Enemies",{
     BgColor = Color3.fromRGB(69,69,69); 
     
 }) 
+
 local autofarm
 b:Toggle("ON/OFF",function(af)
     autofarm = af
@@ -127,6 +128,8 @@ local function COUNT()
     end
     enemycount = 0
 end
+
+
 spawn(function()
     while wait() do
         if autofarm then
